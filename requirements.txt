@@ -1,0 +1,5 @@
+Flask
+Flask-PyMongo
+Flask-RESTful
+mongoengine
+flask_jwt_extended
