@@ -1,110 +1,67 @@
-Sure, here's a tutorial on how to run a Flask application with MongoDB using Docker:
+## Running Mini Wallet Project
 
----
+### Introduction
+This documentation provides step-by-step instructions on how to run the Mini Wallet project. The Mini Wallet project is a Flask-based web application that allows users to manage their digital wallets, make deposits, withdrawals, and view transaction history.
 
-# Running a Flask Application with MongoDB using Docker
+### Prerequisites
+- Python 3.x
+- Docker
+- Postman (optional, for API testing)
 
-In this tutorial, we'll set up and run a Flask application with MongoDB using Docker containers. We'll use Docker Compose to manage the containers and define our application services.
+### Setup Environment
+1. Clone the project repository:
+   ```
+   git clone https://github.com/your/repository.git
+   ```
 
-## Prerequisites
+2. Navigate to the project directory:
+   ```
+   cd mini-wallet
+   ```
 
-Make sure you have Docker and Docker Compose installed on your system. You can download and install Docker Desktop from the official website: [Docker Desktop](https://www.docker.com/products/docker-desktop)
+3. Install Docker and Docker Compose if not already installed.
 
-## Step 1: Set up the Flask Application
+### Running with Docker
+1. Start Docker Compose to spin up the required containers:
+   ```
+   docker-compose up -d
+   ```
 
-1. Create a directory for your Flask application:
+### Running without Docker
+1. Create a virtual environment:
+   ```
+   python3 -m venv venv
+   ```
 
-    ```bash
-    mkdir flask_app
-    cd flask_app
-    ```
+2. Activate the virtual environment:
+   - Windows:
+     ```
+     venv\Scripts\activate
+     ```
+   - Linux/macOS:
+     ```
+     source venv/bin/activate
+     ```
 
-2. Inside the `flask_app` directory, create a new file named `app.py` and add the following code:
+3. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
 
-    ```python
-    from flask import Flask
+### Running the Server
+1. Start the Flask server:
+   ```
+   python3 run.py
+   ```
 
-    app = Flask(__name__)
+### Accessing the API
+- The API endpoints can be accessed using Postman or any other REST client.
+- Base URL: `http://localhost:5000/api/v1/`
 
-    @app.route('/')
-    def hello():
-        return 'Hello, Flask!'
+### Importing Postman Collection
+1. Open Postman.
+2. Import the provided Postman collection file.
+3. You can now use the imported requests to interact with the Mini Wallet API.
 
-    if __name__ == '__main__':
-        app.run(debug=True, host='0.0.0.0')
-    ```
-
-3. Create a `requirements.txt` file in the same directory and add the following content:
-
-    ```
-    Flask==2.0.2
-    ```
-
-4. Initialize a virtual environment and install the dependencies:
-
-    ```bash
-    python3 -m venv venv
-    source venv/bin/activate
-    pip install -r requirements.txt
-    ```
-
-## Step 2: Set up MongoDB Container
-
-1. Create a `docker-compose.yml` file in the `flask_app` directory with the following content:
-
-    ```yaml
-    version: '3.8'
-
-    services:
-      mongo:
-        image: mongo:latest
-        ports:
-          - "27017:27017"
-        volumes:
-          - mongo-data:/data/db
-
-    volumes:
-      mongo-data:
-    ```
-
-2. This `docker-compose.yml` file defines a service named `mongo` using the official MongoDB Docker image. It exposes port 27017 and mounts a volume for data persistence.
-
-## Step 3: Run the Application
-
-1. Start the Docker containers by running the following command in the `flask_app` directory:
-
-    ```bash
-    docker-compose up
-    ```
-
-2. Docker Compose will pull the MongoDB image (if not already available) and start the containers. You should see MongoDB logs in the terminal.
-
-3. Open a new terminal window and navigate to the `flask_app` directory.
-
-4. Activate the virtual environment:
-
-    ```bash
-    source venv/bin/activate
-    ```
-
-5. Run the Flask application:
-
-    ```bash
-    python app.py
-    ```
-
-6. You should see output indicating that the Flask application is running.
-
-## Step 4: Test the Application
-
-1. Open a web browser and navigate to `http://localhost:5000`. You should see the message "Hello, Flask!" displayed.
-
-2. You can also use tools like `curl` or `Postman` to send requests to the Flask application.
-
-## Conclusion
-
-In this tutorial, you learned how to set up and run a Flask application with MongoDB using Docker containers. You can now build upon this setup to develop more complex web applications.
-
----
-
-You can save the above content in a markdown file (`tutorial.md`) for reference. This tutorial provides a step-by-step guide to setting up and running a Flask application with MongoDB using Docker. Feel free to customize it based on your specific requirements and preferences.
+### Conclusion
+You have successfully set up and run the Mini Wallet project. You can now use the provided API endpoints to manage digital wallets and perform transactions. If you encounter any issues, please refer to the troubleshooting section in the documentation or reach out to the project maintainers for assistance.
