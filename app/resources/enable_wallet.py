@@ -5,7 +5,8 @@ from datetime import datetime
 from app.auth_middleware import token_required
 
 class EnableWallet(Resource):
-    @token_required  # Require JWT token for this endpoint
+    @jwt_required()  # Require JWT token for this endpoint
+    # @token_required  # Require JWT token for this endpoint
     def post(self):
 
         # Retrieve customer ID from JWT token
@@ -13,7 +14,7 @@ class EnableWallet(Resource):
         customer_xid = curr_user.get('customer_xid')
 
         # Check if wallet exists for the customer
-        wallet = Wallet.objects(customer_xid=customer_xid).first()
+        wallet = Wallet.objects(customer_id=customer_xid).first()
         if not wallet:
             return {'status': 'error', 'message': 'Wallet not found for this customer'}, 404
 
@@ -28,7 +29,7 @@ class EnableWallet(Resource):
             'data': {
                 'wallet': {
                     'id': str(wallet.id),
-                    'owned_by': str(wallet.customer_xid),
+                    'owned_by': str(wallet.customer_id),
                     'status': wallet.status,
                     'enabled_at': wallet.enabled_at.isoformat(),
                     'balance': float(wallet.balance)

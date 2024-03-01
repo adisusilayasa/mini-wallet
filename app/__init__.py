@@ -16,15 +16,6 @@ jwt = JWTManager(app)
 
 api = Api(app)
 
-# @jwt.request_loader
-def load_jwt_from_header(request):
-    auth_header = request.headers.get("Authorization", None)
-    if auth_header and auth_header.startswith("Token "):
-        token = auth_header.split(" ")[1]
-        return token
-    return None
-
-
 # Connect to MongoDB using the default connection
 connect('mini_wallet_db')
 

@@ -2,9 +2,6 @@ from flask_restful import Resource, reqparse
 from app.models import Wallet
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
-parser = reqparse.RequestParser()
-parser.add_argument('customer_xid', type=str, required=True, help='Customer ID must be provided')
-
 class DisableWallet(Resource):
     @jwt_required()  # Require JWT token for this endpoint
     def patch(self):
@@ -14,7 +11,7 @@ class DisableWallet(Resource):
         customer_xid = curr_user.get('customer_xid')
         
         # Check if wallet exists for the customer
-        wallet = Wallet.objects(customer_xid=customer_xid).first()
+        wallet = Wallet.objects(customer_id=customer_xid).first()
         if not wallet:
             return {'status': 'error', 'message': 'Wallet not found for this customer'}, 404
 

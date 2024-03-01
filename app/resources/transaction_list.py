@@ -12,7 +12,7 @@ class TransactionList(Resource):
         customer_xid = curr_user.get('customer_xid')
         
         # Check if wallet exists for the customer
-        wallet = Wallet.objects(customer_xid=customer_xid).first()
+        wallet = Wallet.objects(customer_id=customer_xid).first()
         if not wallet:
             return {'status': 'error', 'message': 'Wallet not found for this customer'}, 404
         

@@ -36,6 +36,6 @@ def token_required(f):
                 "error": str(e)
             }, 500
 
-        return f(current_user, *args, **kwargs)
+        return f(*args, **kwargs)
 
     return decorated

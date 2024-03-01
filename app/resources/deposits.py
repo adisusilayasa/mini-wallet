@@ -6,8 +6,8 @@ import uuid  # Add this line at the top of your script
 from decimal import Decimal
 
 parser = reqparse.RequestParser()
-parser.add_argument('amount', type=float, required=True, help='Amount must be provided')
-parser.add_argument('reference_id', type=str, required=True, help='Reference ID must be provided')
+parser.add_argument('amount', type=float, required=True, help='Amount must be provided', location='form')
+parser.add_argument('reference_id', type=str, required=True, help='Reference ID must be provided', location='form')
 
 class Deposit(Resource):
     @jwt_required()  # Require JWT token for this endpoint
@@ -20,7 +20,7 @@ class Deposit(Resource):
         curr_user = get_jwt_identity()
         customer_xid = curr_user.get('customer_xid')
         
-        wallet = Wallet.objects(customer_xid=customer_xid).first()
+        wallet = Wallet.objects(customer_id=customer_xid).first()
         if not wallet:
             return {'status': 'error', 'message': 'Wallet not found for this customer'}, 404
 
