@@ -11,7 +11,7 @@ This documentation provides step-by-step instructions on how to run the Mini Wal
 ### Setup Environment
 1. Clone the project repository:
    ```
-   git clone https://github.com/your/repository.git
+   git clone <project repository>
    ```
 
 2. Navigate to the project directory:
@@ -45,7 +45,7 @@ This documentation provides step-by-step instructions on how to run the Mini Wal
 
 3. Install dependencies:
    ```
-   pip install -r requirements.txt
+   pip3 install -r requirements.txt
    ```
 
 ### Running the Server
